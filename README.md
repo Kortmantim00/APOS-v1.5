@@ -120,7 +120,7 @@ Use the following access code to log in:
 
 ```
 <p align="center">
-  <img src="Overview.png" alt="Logo" width="650"/>
+  <img src="Overview.png" alt="Logo" width="950"/>
 </p>
 
 
