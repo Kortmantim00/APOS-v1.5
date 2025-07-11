@@ -119,7 +119,7 @@ Use the following access code to log in:
 ├── settings.py           # Django config
 
 <p align="center">
-  <img src="overview.png" alt="figure" width="250"/>
+  <img src="Overview.png" alt="figure" width="250"/>
 </p>
 
 ```
