@@ -33,7 +33,7 @@ to process, visualize, and interact with DICOM, NIfTI, segmentations, and landma
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
 These instructions assume you're using **Visual Studio Code (VS Code)** on Windows, macOS, or Linux.
 
@@ -50,7 +50,7 @@ cd orthognathic-planner
 code .
 ```
 
-> 📁 The Django project is located in the root folder. Main app: `interface/`.
+> The Django project is located in the root folder. Main app: `interface/`.
 
 ---
 
