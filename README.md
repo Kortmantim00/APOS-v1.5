@@ -6,7 +6,9 @@ A graphical user interface (GUI) for automated 3D planning in orthognathic surge
 Built with **Django**, **VTK.js**, and standard web technologies 
 to process, visualize, and interact with DICOM, NIfTI, segmentations, and landmarks volumes.
 
-![Top Logo](interface/static/images/logotop.png)
+<p align="center">
+  <img src="logologin.png" alt="Logo" width="250"/>
+</p>
 
 ---
 
