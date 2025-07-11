@@ -1,0 +1,112 @@
+{% extends 'interface/segmarksbase.html' %}
+
+{% block title %}APOS User Interface{% endblock %}
+
+{% load static %}
+<script src="{% static 'js/segmarks.js' %}"></script>
+
+{% block sidebar %}
+<h2>Controls</h2>
+
+<form id="dnifti-visualize-form" enctype="multipart/form-data" method="post">
+  {% csrf_token %}
+  <label>DICOM:</label>
+  <button type="submit" id="visualize-dnifti-btn">Show</button>
+  <button type="button" id="hide-dicom-btn">Hide</button>
+</form>
+
+<form id="nifti-visualize-form" enctype="multipart/form-data" method="post">
+  {% csrf_token %}
+  <label>NIFTI:</label>
+  <button type="submit" id="visualize-nifti-btn">Show</button>
+  <button type="button" id="hide-nifti-btn">Hide</button>
+</form><br>
+
+<form id="seg-visualize-form" enctype="multipart/form-data" method="post">
+  {% csrf_token %}
+  <label for="visualize-seg-btn">Segmentation:</label>
+  <div class="form-group">
+    <input type="file" id="nifti-file-input" name="nifti_file" accept=".nii,.nii.gz"><br>
+    <button type="submit" id="visualize-seg-btn">Run algorithm</button><br>
+    <div class="button-container">
+      <button type="button" id="show-seg-btn">Show</button>
+      <button type="button" id="hide-seg-btn">Hide</button>
+    </div>
+  </div>
+</form>
+
+<form id="landmarks-visualize-form" enctype="multipart/form-data" method="post">
+  {% csrf_token %}
+  <label for="landmarks-file-input">Landmarks:</label>
+  <div class="form-group">
+    <input type="file" id="landmarks-file-input" name="landmarks_file" accept=".json" multiple><br>
+    <button type="submit" id="visualize-landmarks-btn">Run algorithm</button><br>
+    <div class="button-container">
+      <button type="button" id="show-landmarks-btn">Show</button>
+      <button type="button" id="hide-landmarks-btn">Hide</button>
+    </div>
+  </div>
+</form>
+
+<br>
+<form id="reset-form" method="post">
+  {% csrf_token %}
+  <button type="button" id="reset-viewer-btn">Empty viewer</button>
+</form>
+
+<br>
+<a href="{% url 'upload' %}" class="btn btn-primary">⬅ Back to Upload</a>
+
+<br><br>
+<a href="{% url 'viewer' %}" class="btn btn-primary">➡ Go to Segmarks</a>
+
+{% endblock %}
+
+{% block viewer %}
+<div class="viewer-grid">
+  <div class="viewer-cell" id="viewer-3d">
+    <div class="viewer-label">3D</div>
+    <div class="viewer-content"></div>
+  </div>
+  <div class="viewer-cell" id="viewer-axial">
+    <div class="viewer-label">Axial</div>
+    <div class="viewer-label-top">A</div>
+    <div class="viewer-label-bottom">P</div>
+    <div class="viewer-label-right">R</div>
+    <div class="viewer-label-left">L</div>
+    <div class="viewer-content"></div>
+  </div>
+  <div class="viewer-cell" id="viewer-coronal">
+    <div class="viewer-label">Coronal</div>
+    <div class="viewer-label-top">S</div>
+    <div class="viewer-label-bottom">I</div>
+    <div class="viewer-label-right">R</div>
+    <div class="viewer-label-left">L</div>
+    <div class="viewer-content"></div>
+  </div>
+  <div class="viewer-cell" id="viewer-sagittal">
+    <div class="viewer-label">Sagittal</div>
+    <div class="viewer-label-top">S</div>
+    <div class="viewer-label-bottom">I</div>
+    <div class="viewer-label-right">P</div>
+    <div class="viewer-label-left">A</div>
+    <div class="viewer-content"></div>
+  </div>
+</div>
+{% endblock %}
+
+{% block results %}
+<h2>Cursor inspector</h2>
+<div id="result-container" class="result-box">
+  <div><strong>Voxel Index:</strong> <span id="voxel-index">–</span></div>
+  <br>
+  <div><strong>Intensity:</strong> <span id="voxel-value">–</span></div>
+</div>
+<br><br><br><br>
+<h2>Log</h2>
+<div id="log-container">
+     <ul id="log-list">
+     <li>Log is empty.</li>
+  </ul>
+</div>
+{% endblock %}
