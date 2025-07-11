@@ -4,28 +4,26 @@ Version 1.5
 
 A graphical user interface (GUI) for automated 3D planning in orthognathic surgery.  
 Built with **Django**, **VTK.js**, and standard web technologies 
-to process, visualize, and interact with DICOM, NIfTI, segmentation, and landmark volumes.
+to process, visualize, and interact with DICOM, NIfTI, segmentations, and landmarks volumes.
 
 ---
 
-## 📦 Features
-
-- Secure login with access code
+## Features
+- Simultaneously visualize generated segmentations and landmarks on anatomy.
 - Upload and processing of:
   - DICOM folders → NIfTI → Binary
   - NIfTI files → Binary
   - Segmentation masks (NIfTI) → Volume overlay
-  - Landmark JSONs → Voxelized volume
+  - Landmark JSONs → Voxelized volume -> Volume overlay
 - 2D and 3D volume visualization using VTK.js
 - Full reset and toggle visibility per dataset
-- Frontend styling with custom CSS and Bootstrap
 
 ---
 
-## 🛠 Tech Stack
+## Tech Stack
 
 - **Backend:** Django (Python)
-- **Frontend:** HTML5, CSS, JavaScript (VTK.js, Bootstrap)
+- **Frontend:** HTML, CSS, JavaScript (VTK.js, Bootstrap)
 - **3D Engine:** VTK.js
 - **Conversion utils:** nibabel, dicom2nifti, numpy, scipy
 
@@ -51,8 +49,6 @@ code .
 > 📁 The Django project is located in the root folder. Main app: `interface/`.
 
 ---
-
-## ⚙️ Setup Instructions
 
 ### 3. Create a Python virtual environment
 
@@ -80,27 +76,19 @@ pip install django dicom2nifti nibabel numpy scipy
 
 ---
 
-## ▶️ Running the App
-
-### 6. Apply migrations
-
-```bash
-python manage.py migrate
-```
-
-### 7. Start the development server
+### 6. Start the development server
 
 ```bash
 python manage.py runserver
 ```
 
-### 8. Open the app
+### 7. Open the app
 
-Visit [http://127.0.0.1:8000](http://127.0.0.1:8000) in your browser.
+after runserver, visit [http://127.0.0.1:8000](http://127.0.0.1:8000) in your browser.
 
 ---
 
-## 🔐 Login Access
+## Login Access
 
 Use the following access code to log in:
 
@@ -110,7 +98,7 @@ Use the following access code to log in:
 
 ---
 
-## 🧭 Project Structure Overview
+## Project Structure Overview
 
 ```
 ├── interface/
@@ -129,7 +117,7 @@ Use the following access code to log in:
 
 ---
 
-## 📂 Media Storage
+## Media Storage
 
 Uploaded volumes and generated binaries are stored in:
 
@@ -141,11 +129,14 @@ Uploaded volumes and generated binaries are stored in:
 
 ---
 
-## 🧪 Useful Development Commands
+## Useful Development Commands
 
 ```bash
 # Run development server
 python manage.py runserver
+
+# Apply migrations
+python manage.py migrate
 
 # Create superuser (if needed)
 python manage.py createsuperuser
@@ -156,7 +147,7 @@ rm -rf media/*
 
 ---
 
-## 👨‍🔬 Authors
+## Authors
 
 Developed for research and prototyping in cranio-maxillofacial planning.
 Author: T.Kortman
