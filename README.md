@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="logologin.png" alt="Logo" width="250"/>
+  <img src="logologin.png" alt="Logo" width="220"/>
 </p>
 
 # Automated Planning for Orthognatic Surgery (APOS) 
@@ -120,7 +120,7 @@ Use the following access code to log in:
 
 ```
 <p align="center">
-  <img src="Overview.png" alt="Logo" width="250"/>
+  <img src="Overview.png" alt="Logo" width="650"/>
 </p>
 
 
