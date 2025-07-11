@@ -1,14 +1,14 @@
-# Automated Planning for Orthognatic Surgery (APOS) - User interface
+<p align="center">
+  <img src="logologin.png" alt="Logo" width="250"/>
+</p>
+
+# Automated Planning for Orthognatic Surgery (APOS) 
 
 Version 1.5
 
 A graphical user interface (GUI) for automated 3D planning in orthognathic surgery.  
 Built with **Django**, **VTK.js**, and standard web technologies 
 to process, visualize, and interact with DICOM, NIfTI, segmentations, and landmarks volumes.
-
-<p align="center">
-  <img src="logologin.png" alt="Logo" width="250"/>
-</p>
 
 ---
 
