@@ -153,6 +153,6 @@ rm -rf media/*
 
 ## Authors
 
-Developed for research and prototyping in cranio-maxillofacial planning.
+Developed for research and prototyping in cranio-maxillofacial planning at the ErasmusMC
 Author: T.Kortman
 t.kortman@erasmusmc.nl
