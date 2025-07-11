@@ -118,11 +118,11 @@ Use the following access code to log in:
 ├── manage.py             # Django runner
 ├── settings.py           # Django config
 
+```
 <p align="center">
   <img src="Overview.png" alt="Logo" width="250"/>
 </p>
 
-```
 
 ---
 
