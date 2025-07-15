@@ -123,6 +123,10 @@ Use the following access code to log in:
   <img src="Overview.png" alt="Logo" width="950"/>
 </p>
 
+<p align="center">
+  <img src="datapipeline.png" alt="Logo" width="750"/>
+</p>
+
 
 ---
 
