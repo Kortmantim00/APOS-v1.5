@@ -33,7 +33,7 @@ def write_volume_to_binary(volume, spacing, origin, bin_path, meta_path, is_base
         json.dump({'spacing': spacing, 'dims': dims[::-1], 'origin': origin}, f)
 
 
-def convert_nifti_to_binary(nifti_path, bin_out, meta_out, preview_scale=0.25, contrast_factor=0.5, generate_preview=True):
+def convert_nifti_to_binary(nifti_path, bin_out, meta_out, preview_scale=0.25, contrast_factor=0.3, generate_preview=True):
     """
     Converts a NIfTI file to binary format with optional downscaled preview.
     -> for speed: using lazy loading
@@ -59,7 +59,7 @@ def convert_nifti_to_binary(nifti_path, bin_out, meta_out, preview_scale=0.25, c
     volume = np.zeros(img.shape, dtype=np.uint8)
     for z in range(0, img.shape[2], 20):
         slice_data = data[:, :, z:z + 20]
-        slice_data = np.clip(slice_data * contrast_factor, 0, 255).astype(np.uint8)
+        slice_data = np.clip(slice_data * contrast_factor, 0, 255).astype(np.uint8) #contrast / windowrendering
         volume[:, :, z:z + slice_data.shape[2]] = slice_data
 
     write_volume_to_binary(volume, spacing, origin, bin_out, meta_out, is_base=True)
