@@ -126,7 +126,7 @@ Use the following access code to log in:
 
 
 <p align="center">
-  <img src="datapipeline.png" alt="Logo" width="950"/>
+  <img src="datastructure.png" alt="Logo" width="950"/>
 </p>
 
 ---
