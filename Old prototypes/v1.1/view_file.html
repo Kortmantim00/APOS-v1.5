@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>NIfTI Viewer</title>
+    <script src="{% static 'visualizer/libs/three.min.js' %}"></script>
+    <script src="{% static 'visualizer/libs/nifti-reader.js' %}"></script>
+    <script src="{% static 'visualizer/js/nifti_viewer.js' %}"></script>
+    <style>
+        body { margin: 0; overflow: hidden; }
+        canvas { display: block; }
+    </style>
+</head>
+<body>
+    <input type="file" id="niftiInput">
+    <div id="viewer"></div>
+</body>
+</html>

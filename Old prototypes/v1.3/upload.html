@@ -1,0 +1,52 @@
+
+{% extends 'interface/uploadbase.html' %}
+
+{% block title %}Upload{% endblock %}
+
+{% load static %}
+<script src="{% static 'js/upload.js' %}"></script>
+
+{% block controls %}
+<h2>Controls</h2>
+<form id="dicom-upload-form" enctype="multipart/form-data" method="post">
+  {% csrf_token %}
+  <label for="dicom-files">DICOM:</label>
+  <input type="file" id="dicom-files" name="dicom_file" multiple /><br>
+  <button type="submit" id="upload-dicom-btn">Inladen DICOM</button>
+</form>
+
+<form id="nifti-upload-form" enctype="multipart/form-data" method="post">
+  {% csrf_token %}
+  <label for="nifti-file">NIFTI:</label>
+  <input type="file" id="nifti-file" name="nifti_file"><br>
+  <button type="submit" id="upload-nifti-btn">Inladen NIFTI</button>
+</form>
+
+<br><br><br><br>
+<form id="reset-form" method="post">
+  {% csrf_token %}
+  <button type="button" id="reset-btn"> Reset /media</button>
+</form>
+
+<br><br>
+<a href="{% url 'viewer' %}" class="btn btn-primary">➡ Ga naar Viewer</a>
+{% endblock %}
+
+{% block results %}
+<h2>Ingeladen bestanden</h2>
+<div id="file-list" class="result-box">
+  <p>media is leeg</p>
+</div>
+<div id="refresh-btn" >
+  <button type="button" id="refresh-btn" >🔄</button>
+</div>
+
+<br><br>
+
+<h2>Log </h2>
+<div id="log-container">
+  <ul id="log-list">
+    <li>Logboek is leeg.</li>
+  </ul>
+</div>
+{% endblock %}

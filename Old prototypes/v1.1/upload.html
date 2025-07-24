@@ -1,0 +1,18 @@
+<!-- visualizer/templates/visualizer/upload.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>NIFTI Upload</title>
+</head>
+<body>
+    <h1>Upload een NIFTI-bestand</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Upload</button>
+    </form>
+    <a href="{% url 'uploaded_files' %}">Bekijk geüploade bestanden</a>
+</body>
+</html>

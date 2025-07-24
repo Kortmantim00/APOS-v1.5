@@ -1,0 +1,25 @@
+
+{% extends "interface/loginbase.html" %}
+{% load static %}
+{% block content %}
+  <div class="login-box">
+    <img src="{% static 'images/logologin.png' %}" alt="Logo">
+    <h2>Orthognathic planning - User Interface</h2>
+    <p>Please enter the access code to start the application</p>
+
+    <form method="post">
+      {% csrf_token %}
+      <input type="password" name="access_code" required>
+      <button type="submit" >Enter</button>
+    </form>
+
+    {% if messages %}
+      <ul class="messages">{% for message in messages %}
+        {% if message.tags == "error" %}  
+          <li>{{ message }}</li>
+        {% endif %}  
+      {% endfor %}</ul>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

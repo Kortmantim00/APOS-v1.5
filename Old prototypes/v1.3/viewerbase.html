@@ -1,0 +1,39 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}Interface{% endblock %}</title>
+
+  <link rel="icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+
+<body>
+  <header class="topbar">
+    <h1>Prototype 3</h1>
+    <nav class="tabnav">
+      <a href="{% url 'upload' %}" class="{% if request.path == '/upload/' %}active{% endif %}">Upload</a>
+      <a href="{% url 'viewer' %}" class="{% if request.path == '/viewer/' %}active{% endif %}">Viewer</a>
+    </nav>
+  </header>
+
+  <div class="layout-wrapper">
+    <aside class="sidebar-left">
+      {% block sidebar %}{% endblock %}
+    </aside>
+    <main class="viewer">
+      {% block viewer %}{% endblock %}
+    </main>
+    <aside class="sidebar-right">
+      {% block results %}{% endblock %}
+    </aside>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/three@0.153.0/build/three.min.js"></script>
+  <script src="https://unpkg.com/vtk.js"></script>
+  <script src="{% static 'js/viewer.js' %}"></script>
+</body>
+</html>

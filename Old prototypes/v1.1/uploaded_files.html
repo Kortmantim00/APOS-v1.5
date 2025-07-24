@@ -1,0 +1,23 @@
+<!-- visualizer/templates/visualizer/uploaded_files.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Geüploade NIFTI-bestanden</title>
+</head>
+<body>
+    <h1>Geüploade bestanden</h1>
+    <ul>
+        {% for file in files %}
+            <li>
+                {{ file.title }} - 
+                <a href="{{ file.file.url }}" target="_blank">Download / Bekijk</a>
+            </li>
+        {% empty %}
+            <li>Geen bestanden gevonden.</li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'upload_file' %}">Nieuw bestand uploaden</a>
+</body>
+</html>

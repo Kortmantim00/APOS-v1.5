@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login | Orthognatic User Interface</title>
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'styles.css' %}">
+  <style>
+    body {
+      margin: 0;
+      font-family: sans-serif;
+      background-color: #f4f4f4;
+    }
+    .login-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 95vh;
+    }
+    .login-box {
+      background: white;
+      padding: 50px;
+      border-radius: 14px;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+      text-align: center;
+      width: 600px;
+      max-width: 90vw;
+    }
+    .login-box img {
+      max-width: 200px;
+      margin-bottom: 35px;
+    }
+    .login-box input[type="password"] {
+      padding: 10px;
+      width: 60%;
+      margin-top: 20px;
+      margin-bottom: 15px;
+      font-size: 18px;
+      text-align: center
+    }
+    .login-box button {
+      padding: 10px 25px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .messages li {
+      color: red;
+      list-style: none;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    {% block content %}{% endblock %}
+  </div>
+</body>
+</html>

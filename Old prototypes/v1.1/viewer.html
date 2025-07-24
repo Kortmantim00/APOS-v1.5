@@ -1,0 +1,110 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>3D Viewer met NIfTI slice</title>
+    <style>
+        body { margin: 0; font-family: sans-serif; background: #000; color: white; }
+        #container { width: 100vw; height: 100vh; }
+        #ui { position: absolute; top: 10px; left: 10px; z-index: 10; background: rgba(0,0,0,0.5); padding: 10px; }
+    </style>
+</head>
+<body>
+    <div id="ui">
+        <input type="file" id="nifti-file" accept=".nii,.nii.gz" />
+        <pre id="output"></pre>
+    </div>
+    <div id="container"></div>
+
+    <!-- ✅ Laad libraries -->
+    <script src="https://unpkg.com/three@0.148.0/build/three.min.js"></script>
+
+    <script src="{% static 'visualizer/libs/nifti-reader.js' %}"></script>
+
+    <script>
+        const container = document.getElementById('container');
+        const output = document.getElementById('output');
+        const fileInput = document.getElementById('nifti-file');
+
+        let scene, camera, renderer;
+
+        function initScene() {
+            scene = new THREE.Scene();
+            camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
+            camera.position.z = 2;
+
+            renderer = new THREE.WebGLRenderer();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            container.innerHTML = '';
+            container.appendChild(renderer.domElement);
+        }
+
+        function showSlice(data, dims) {
+            const width = dims[0];
+            const height = dims[1];
+            const depth = dims[2];
+
+            const sliceIndex = Math.floor(depth / 2);  // Midden-slice
+            const sliceData = new Uint8ClampedArray(width * height * 4); // RGBA
+
+            // Normaliseer en zet om naar RGBA
+            const min = Math.min(...data);
+            const max = Math.max(...data);
+
+            for (let y = 0; y < height; y++) {
+                for (let x = 0; x < width; x++) {
+                    const i = x + y * width + sliceIndex * width * height;
+                    const value = ((data[i] - min) / (max - min)) * 255;
+                    const pixelIndex = (x + y * width) * 4;
+                    sliceData[pixelIndex] = value;     // R
+                    sliceData[pixelIndex + 1] = value; // G
+                    sliceData[pixelIndex + 2] = value; // B
+                    sliceData[pixelIndex + 3] = 255;   // A
+                }
+            }
+
+            const texture = new THREE.DataTexture(sliceData, width, height, THREE.RGBAFormat);
+            texture.needsUpdate = true;
+
+            const material = new THREE.MeshBasicMaterial({ map: texture });
+            const geometry = new THREE.PlaneGeometry(1.5, 1.5 * height / width);
+            const plane = new THREE.Mesh(geometry, material);
+
+            scene.add(plane);
+            renderer.render(scene, camera);
+        }
+
+        fileInput.addEventListener('change', async (event) => {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            output.textContent = "⏳ Bestand aan het laden...";
+
+            const reader = new FileReader();
+            reader.onload = function () {
+                const arrayBuffer = reader.result;
+                if (nifti.isCompressed(arrayBuffer)) {
+                    const decompressed = nifti.decompress(arrayBuffer);
+                    const niftiHeader = nifti.readHeader(decompressed);
+                    const niftiImage = nifti.readImage(niftiHeader, decompressed);
+                    const data = new Int16Array(niftiImage);
+                    output.textContent = `✅ Ingeladen: ${niftiHeader.dims.slice(1, 4).join(" x ")}`;
+                    initScene();
+                    showSlice(data, niftiHeader.dims.slice(1, 4));
+                } else if (nifti.isNIFTI(arrayBuffer)) {
+                    const niftiHeader = nifti.readHeader(arrayBuffer);
+                    const niftiImage = nifti.readImage(niftiHeader, arrayBuffer);
+                    const data = new Int16Array(niftiImage);
+                    output.textContent = `✅ Ingeladen: ${niftiHeader.dims.slice(1, 4).join(" x ")}`;
+                    initScene();
+                    showSlice(data, niftiHeader.dims.slice(1, 4));
+                } else {
+                    output.textContent = "❌ Geen geldig NIfTI-bestand.";
+                }
+            };
+            reader.readAsArrayBuffer(file);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,84 @@
+{% extends 'interface/viewerbase.html' %}
+
+{% block title %}Orthognatic interface{% endblock %}
+
+{% load static %}
+<script src="{% static 'js/viewer.js' %}"></script>
+
+{% block sidebar %}
+<h2>Controls</h2>
+<form id="dicom-visualize-form" enctype="multipart/form-data" method="post">
+  {% csrf_token %}
+  <label>DICOM:</label>
+  <button type="submit" id="visualize-dicom-btn">Visualiseer DICOM</button>
+</form>
+<br>
+
+<form id="nifti-visualize-form" enctype="multipart/form-data" method="post">
+  {% csrf_token %}
+  <label>NIFTI:</label>
+  <button type="submit" id="visualize-nifti-btn">Visualiseer NIFTI</button>
+</form>
+
+<br><br><br><br>
+<form id="reset-form" method="post">
+  {% csrf_token %}
+  <button type="button" id="reset-viewer-btn"> Reset viewer</button>
+</form>
+
+<br><br>
+<a href="{% url 'upload' %}" class="btn btn-primary">⬅ Terug naar Upload</a>
+
+<br><br>
+<a href="{% url 'viewer' %}" class="btn btn-primary">➡ Ga naar segmentatie</a>
+
+{% endblock %}
+
+{% block viewer %}
+<div class="viewer-grid">
+  <div class="viewer-cell" id="viewer-3d">
+    <div class="viewer-label">3D</div>
+    <div class="viewer-content"></div>
+  </div>
+  <div class="viewer-cell" id="viewer-axial">
+    <div class="viewer-label">Axial</div>
+    <div class="viewer-label-top">A</div>
+    <div class="viewer-label-bottom">P</div>
+    <div class="viewer-label-right">R</div>
+    <div class="viewer-label-left">L</div>
+    <div class="viewer-content"></div>
+  </div>
+  <div class="viewer-cell" id="viewer-coronal">
+    <div class="viewer-label">Coronal</div>
+    <div class="viewer-label-top">S</div>
+    <div class="viewer-label-bottom">I</div>
+    <div class="viewer-label-right">R</div>
+    <div class="viewer-label-left">L</div>
+    <div class="viewer-content"></div>
+  </div>
+  <div class="viewer-cell" id="viewer-sagittal">
+    <div class="viewer-label">Sagittal</div>
+    <div class="viewer-label-top">S</div>
+    <div class="viewer-label-bottom">I</div>
+    <div class="viewer-label-right">P</div>
+    <div class="viewer-label-left">A</div>
+    <div class="viewer-content"></div>
+  </div>
+</div>
+{% endblock %}
+
+{% block results %}
+  <h2>Cursor inspector</h2>
+    <div id="result-container" class="result-box">
+      <div><strong>Voxel Index:</strong> <span id="voxel-index">–</span></div>
+      <br>
+      <div><strong>Intensity:</strong> <span id="voxel-value">–</span></div>
+    </div>
+    <br><br><br><br>
+  <h2>Log </h2>
+    <div id="log-container">
+         <ul id="log-list">
+         <li>Logboek is leeg.</li>
+      </ul>
+    </div>
+{% endblock %}
